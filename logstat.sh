@@ -40,20 +40,20 @@ do
 		fi
                 ;;
              ?)
-                echo "unkonw argument"
+                aecho "unkonw argument"
                 exit 1
                 ;;
         esac
 done
 
-LOGFILE_NAMES=`ls -t | grep -E $FILE_PATTERN`
-LOGFILE_NUMS=`ls -l | grep $FILE_PATTERN -c`
+LOGFILE_NAMES=`ls -t | grep -E "$FILE_PATTERN"`
+LOGFILE_NUMS=`ls -l | grep -E "$FILE_PATTERN" -c`
 
 [ $LOGFILE_NUMS -eq 0 ] && echo "Not found any logs with pattern(-t):$FILE_PATTERN" && exit 1
 
 #Prepare fifo for multi threads.
 TMPFIFO=$TMP_DIR/logstat_tmpfifo.$$
-
+touch $TMPFIFO
 mkfifo $TMPFIFO
 exec 6<>$TMPFIFO
 for ((i=0;i<$THREAD_NUMS;i++))
