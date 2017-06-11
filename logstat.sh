@@ -40,7 +40,7 @@ do
 		fi
                 ;;
              ?)
-                aecho "unkonw argument"
+                echo "unkonw argument"
                 exit 1
                 ;;
         esac
